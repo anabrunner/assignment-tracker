@@ -2,4 +2,8 @@ const uppercase = (text: string) => {
   return text.toUpperCase();
 };
 
-export { uppercase };
+const trim = (text: string) => {
+  return text.trim();
+};
+
+export { uppercase, trim };
