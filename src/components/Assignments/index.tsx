@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
@@ -8,6 +9,7 @@ export function Assignments({
   assignmentList: string[],
   setAssignmentList: (assignmentList: string[]) => void
 }) {
+  const [completedCounter, setCompletedCounter] = useState(0);
   const handleDeleteButton = (index: number) => {
     const updatedAssignmentList = assignmentList.filter((_, i) => i != index);
     setAssignmentList(updatedAssignmentList);
@@ -22,7 +24,7 @@ export function Assignments({
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span> of {assignmentList.length}</span>
+          <span>{completedCounter} of {assignmentList.length}</span>
         </div>
       </header>
 
@@ -32,6 +34,8 @@ export function Assignments({
             assignment={assignment}
             handleDeleteButton={handleDeleteButton}
             id={index}
+            completedCounter={completedCounter}
+            setCompletedCounter={setCompletedCounter}
             key={index}
           />
         ))}

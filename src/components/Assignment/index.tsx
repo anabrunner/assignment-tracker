@@ -6,11 +6,15 @@ import { useState } from "react";
 export function Assignment({
   assignment,
   handleDeleteButton,
-  id
+  id,
+  completedCounter,
+  setCompletedCounter
 }: {
   assignment: string,
   handleDeleteButton: (index: number) => void,
-  id: number
+  id: number,
+  completedCounter: number,
+  setCompletedCounter: (count: number) => void
 }) {
   const [complete, setComplete] = useState(false);
   const checkCompleteIcon = () => {
@@ -30,8 +34,13 @@ export function Assignment({
   return (
     <div className={styles.assignment}>
       <button className={styles.checkContainer} onClick={() => {
-        if (complete) setComplete(false);
-        else setComplete(true);
+        if (complete) {
+          setComplete(false);
+          setCompletedCounter(completedCounter - 1);
+        } else {
+          setComplete(true);
+          setCompletedCounter(completedCounter + 1);
+        }
       }}>
         {checkCompleteIcon()}
       </button>
