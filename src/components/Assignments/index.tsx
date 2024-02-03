@@ -7,7 +7,7 @@ export function Assignments({assignmentList}: {assignmentList: string[]}) {
       <header className={styles.header}>
         <div>
           <p>Created Assignments</p>
-          <span>1</span>
+          <span>{assignmentList.length}</span>
         </div>
 
         <div>
