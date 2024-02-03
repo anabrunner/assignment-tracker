@@ -13,7 +13,10 @@ function App() {
         assignmentList={assignmentList}
         addNewAssignment={setAssignmentList}
       />
-      <Assignments assignmentList={assignmentList}/>
+      <Assignments 
+        assignmentList={assignmentList}
+        setAssignmentList={setAssignmentList}
+      />
     </>
   );
 };

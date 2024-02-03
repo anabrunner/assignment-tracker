@@ -1,7 +1,17 @@
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
-export function Assignments({assignmentList}: {assignmentList: string[]}) {
+export function Assignments({
+  assignmentList,
+  setAssignmentList
+}: {
+  assignmentList: string[],
+  setAssignmentList: (assignmentList: string[]) => void
+}) {
+  const handleDeleteButton = (index: number) => {
+    const updatedAssignmentList = assignmentList.filter((_, i) => i != index);
+    setAssignmentList(updatedAssignmentList);
+  };
   return (
     <section className={styles.assignments}>
       <header className={styles.header}>
@@ -17,8 +27,13 @@ export function Assignments({assignmentList}: {assignmentList: string[]}) {
       </header>
 
       <div className={styles.list}>
-        {assignmentList.map((assignment) => (
-          <Assignment assignment={assignment}/>
+        {assignmentList.map((assignment, index) => (
+          <Assignment 
+            assignment={assignment}
+            handleDeleteButton={handleDeleteButton}
+            id={index}
+            key={index}
+          />
         ))}
       </div>
     </section>
