@@ -22,7 +22,7 @@ export function Assignments({
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>1 of 1</span>
+          <span> of {assignmentList.length}</span>
         </div>
       </header>
 
