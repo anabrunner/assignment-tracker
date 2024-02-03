@@ -13,6 +13,16 @@ export function Header({
   assignmentList: string[], 
   addNewAssignment: (assignmentList: string[]) => void
 }) {
+  const handleCreateButton = () => {
+    addNewAssignment([...assignmentList, assignment]);
+    setAssignment('');
+  };
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleCreateButton();
+    };
+  };
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
@@ -22,15 +32,13 @@ export function Header({
           placeholder="Add a new assignment" 
           type="text" 
           value={assignment}
-          onChange={(e) => setAssignment(trim(e.target.value))} 
+          onChange={(e) => setAssignment(trim(e.target.value))}
+          onKeyDown={handleKeyPress} 
         />
         <button 
           type="button" 
           disabled={!assignment} 
-          onClick={() => {
-            addNewAssignment([...assignmentList, assignment]);
-            setAssignment('');
-            }}
+          onClick={handleCreateButton}
         >
           Create <AiOutlinePlusCircle size={20} />
         </button>
