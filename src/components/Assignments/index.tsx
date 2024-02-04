@@ -10,11 +10,14 @@ export function Assignments({
 }) {
   const handleDeleteButton = (id: number) => {
     const updatedAssignmentList = assignmentList.filter((assignment) => assignment.id !== id);
+    console.log(updatedAssignmentList);
     setAssignmentList(updatedAssignmentList);
   };
   const handleCompletedTask = (id: number, complete: boolean) => {
-    const updatedAssignmentList = assignmentList.map((assignments) => assignments.id === id ? {...assignments, completed: complete} : assignments);
-    console.log(complete);
+    const updatedAssignmentList = assignmentList.map((assignments) => (
+      assignments.id === id ? {...assignments, completed: complete} : assignments
+    ));
+    console.log(updatedAssignmentList);
     setAssignmentList(updatedAssignmentList);
   };
   const countCompletedTasks = () => {
@@ -39,6 +42,7 @@ export function Assignments({
           <Assignment 
             id={assignment.id}
             assignment={assignment.task}
+            completed={assignment.completed}
             handleDeleteButton={handleDeleteButton}
             handleCompletedTask={handleCompletedTask}
             key={index}

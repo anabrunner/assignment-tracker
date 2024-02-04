@@ -3,7 +3,8 @@ import { Assignments } from "./components/Assignments";
 import { useState } from "react";
 
 function App() {
-  const [assignmentList, setAssignmentList] = useState<Array<{id: number; task: string; completed: boolean }>>([]);
+  const [assignmentList, setAssignmentList] = 
+    useState<Array<{id: number; task: string; completed: boolean }>>([]);
   return (
     <>
       <Header 

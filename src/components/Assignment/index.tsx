@@ -1,29 +1,29 @@
 import styles from "./assignment.module.css";
 import { TbTrash } from "react-icons/tb";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import { useState } from "react";
 
 export function Assignment({
   id,
   assignment,
+  completed,
   handleDeleteButton,
   handleCompletedTask
 }: {
   id: number,
   assignment: string,
+  completed: boolean,
   handleDeleteButton: (index: number) => void,
   handleCompletedTask: (id: number, complete: boolean) => void
 }) {
-  const [complete, setComplete] = useState(false);
   const checkCompleteIcon = () => {
-    if (complete) {
+    if (completed) {
       return (<BsFillCheckCircleFill />);
     } else {
       return (<div />);
-    };
+    }
   };
   const checkCompleteText = () => {
-    if (complete) {
+    if (completed) {
       return (<p className={styles.textCompleted}>{assignment}</p>);
     } else {
       return (<p>{assignment}</p>)
@@ -32,8 +32,7 @@ export function Assignment({
   return (
     <div className={styles.assignment}>
       <button className={styles.checkContainer} onClick={() => {
-        setComplete(!complete);
-        handleCompletedTask(id, !complete);
+        handleCompletedTask(id, !completed);
       }}>
         {checkCompleteIcon()}
       </button>
