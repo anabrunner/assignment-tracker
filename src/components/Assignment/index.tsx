@@ -4,17 +4,15 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import { useState } from "react";
 
 export function Assignment({
+  id,
   assignment,
   handleDeleteButton,
-  id,
-  completedCounter,
-  setCompletedCounter
+  handleCompletedTask
 }: {
+  id: number,
   assignment: string,
   handleDeleteButton: (index: number) => void,
-  id: number,
-  completedCounter: number,
-  setCompletedCounter: (count: number) => void
+  handleCompletedTask: (id: number, complete: boolean) => void
 }) {
   const [complete, setComplete] = useState(false);
   const checkCompleteIcon = () => {
@@ -34,13 +32,8 @@ export function Assignment({
   return (
     <div className={styles.assignment}>
       <button className={styles.checkContainer} onClick={() => {
-        if (complete) {
-          setComplete(false);
-          setCompletedCounter(completedCounter - 1);
-        } else {
-          setComplete(true);
-          setCompletedCounter(completedCounter + 1);
-        }
+        setComplete(!complete);
+        handleCompletedTask(id, !complete);
       }}>
         {checkCompleteIcon()}
       </button>

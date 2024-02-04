@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
@@ -6,13 +5,20 @@ export function Assignments({
   assignmentList,
   setAssignmentList
 }: {
-  assignmentList: string[],
-  setAssignmentList: (assignmentList: string[]) => void
+  assignmentList: Array<{id: number; task: string; completed: boolean}>, 
+  setAssignmentList: (assignmentList: Array<{id: number; task: string; completed: boolean}>) => void
 }) {
-  const [completedCounter, setCompletedCounter] = useState(0);
-  const handleDeleteButton = (index: number) => {
-    const updatedAssignmentList = assignmentList.filter((_, i) => i != index);
+  const handleDeleteButton = (id: number) => {
+    const updatedAssignmentList = assignmentList.filter((assignment) => assignment.id !== id);
     setAssignmentList(updatedAssignmentList);
+  };
+  const handleCompletedTask = (id: number, complete: boolean) => {
+    const updatedAssignmentList = assignmentList.map((assignments) => assignments.id === id ? {...assignments, completed: complete} : assignments);
+    console.log(complete);
+    setAssignmentList(updatedAssignmentList);
+  };
+  const countCompletedTasks = () => {
+    return assignmentList.filter((assignment) => assignment.completed).length;
   };
   return (
     <section className={styles.assignments}>
@@ -24,18 +30,17 @@ export function Assignments({
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>{completedCounter} of {assignmentList.length}</span>
+          <span>{countCompletedTasks()} of {assignmentList.length}</span>
         </div>
       </header>
 
       <div className={styles.list}>
         {assignmentList.map((assignment, index) => (
           <Assignment 
-            assignment={assignment}
+            id={assignment.id}
+            assignment={assignment.task}
             handleDeleteButton={handleDeleteButton}
-            id={index}
-            completedCounter={completedCounter}
-            setCompletedCounter={setCompletedCounter}
+            handleCompletedTask={handleCompletedTask}
             key={index}
           />
         ))}
